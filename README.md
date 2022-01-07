@@ -22,3 +22,7 @@ Install it from https://love2d.org
 ### Windows
 
 Install Love2d and drag project folder into the exe file
+
+### Screenshot
+
+![](LuaPong.png)
