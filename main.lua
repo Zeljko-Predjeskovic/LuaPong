@@ -1,7 +1,7 @@
 #!/user/bin/env lua
 
 function love.load()
-	love.window.setTitle("firstGame")
+	love.window.setTitle("Pong")
 	love.window.setMode(550, 380, { resizable=false,
 	vsync=false})
 	font = love.graphics.newFont(30)
