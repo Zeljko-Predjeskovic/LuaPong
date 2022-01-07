@@ -13,6 +13,7 @@ function love.load()
 	ball.x= 450/2
 	ball.y= 380/2
 	ball.radius = 10
+	ball.direction = false
 
 	player1.x = 0
 	player1.y = 40
@@ -36,6 +37,16 @@ function love.update()
 		end
 		if love.keyboard.isDown("k") then
 			player2.y = player2.y+1
+		end
+
+		if ball.x == 20 then
+			ball.direction = true
+		elseif ball.x==430 then
+			ball.direction = false
+		end
+		if ball.direction then
+			ball.x = ball.x+0.5
+		else ball.x = ball.x-0.5
 		end
 end
 
