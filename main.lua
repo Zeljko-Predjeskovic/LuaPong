@@ -15,7 +15,6 @@ function love.load()
 	ball.radius = 10
 	ball.direction = false
 	ball.angle = 0
-	ball.hitWall = false
 
 	player1.x = 0
 	player1.y = 40
@@ -53,9 +52,9 @@ function love.update()
 			and ball.x >= 540 then
 			ball.direction = false
 			ball.angle = (randomAngle*100 - (randomAngle*100)%1)/100
-
+		end
 	-- Check if it hits wall when no player reaches the ball and resets after a point is done		
-		elseif ball.x<=0 then
+		if ball.x<=0 then
 			player2.score = player2.score+1
 			ball.x = 550/2
 			ball.y = 380/2
@@ -69,7 +68,7 @@ function love.update()
 
 	-- Detection for the walls for the ball to reflect on
 
-		if ball.y <= 50 or ball.y >= 375 then
+		if ball.y <= 5 or ball.y >= 375 then
 			ball.angle = ball.angle*-1
 		end
 
@@ -91,7 +90,10 @@ function love.draw()
 
 	love.graphics.circle("fill",ball.x,ball.y,ball.radius)
 
-	love.graphics.print(player1.score,player1.x,0)
-	love.graphics.print(player2.score,player2.x-10,0)
+	love.graphics.print(player1.score,550/4,0)
+	love.graphics.print(player2.score,550-550/4, 0)
+
+	-- Draws dotted lines
+	love.graphics.line(550/2,0,550/2,380)
 end
 
