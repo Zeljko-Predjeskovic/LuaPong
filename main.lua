@@ -2,7 +2,7 @@
 
 function love.load()
 	love.window.setTitle("firstGame")
-	love.window.setMode(450, 380, { resizable=false,
+	love.window.setMode(550, 380, { resizable=false,
 	vsync=false})
 	font = love.graphics.newFont(30)
 
@@ -10,22 +10,25 @@ function love.load()
 	player2 = {}
 	ball = {}
 
-	ball.x= 450/2
+	ball.x= 550/2
 	ball.y= 380/2
 	ball.radius = 10
 	ball.direction = false
+	ball.angle = 0
+	ball.hitWall = false
 
 	player1.x = 0
 	player1.y = 40
 	player1.score=0
 	
-	player2.x = 430
+	player2.x = 530
 	player2.y = 40
 	player2.score=0
 
 end
 
 function love.update()
+	-- Key inputs for the two rectangles
 		if love.keyboard.isDown("w") then
 			player1.y = player1.y-1
 		end
@@ -38,21 +41,51 @@ function love.update()
 		if love.keyboard.isDown("k") then
 			player2.y = player2.y+1
 		end
+	
+	-- Check if the ball hits player and set the direction and angle in which way it will go
+		randomAngle = math.random()-0.5
 
-		if ball.x == 20 then
+		if (ball.y>=player1.y and ball.y<=player1.y+80)
+			and ball.x<=20 then
 			ball.direction = true
-		elseif ball.x==430 then
+			ball.angle = (randomAngle*100 - (randomAngle*100)%1)/100
+		elseif (ball.y >= player2.y and ball.y<=player2.y+80)
+			and ball.x >= 530 then
 			ball.direction = false
+			ball.angle = (randomAngle*100 - (randomAngle*100)%1)/100
+
+	-- Check if it hits wall when no player reaches the ball		
+		elseif ball.x==0 then
+			player2.score = player2.score+1
+			ball.x = 550/2
+			ball.y = 380/2
+			ball.angle = 0
+		elseif ball.x==550 then
+			player1.score = player1.score+1
+			ball.x = 550/2
+			ball.y = 380/2
+			ball.angle=0
 		end
+
+	-- Detection for the walls for the ball to reflect on
+
+		if ball.y <= 50 or ball.y >= 375 then
+			ball.angle = ball.angle*-1
+		end
+
+	-- Ball movement
+		
+		speed = 0.5 
 		if ball.direction then
-			ball.x = ball.x+0.5
-		else ball.x = ball.x-0.5
+			ball.x = ball.x+speed
+		else ball.x = ball.x-speed
 		end
+		ball.y = ball.y + ball.angle
 end
 
 function love.draw()
-	love.graphics.rectangle("fill",player1.x,player1.y,20,60)
-	love.graphics.rectangle("fill",player2.x,player2.y,20,60)
+	love.graphics.rectangle("fill",player1.x,player1.y,20,80)
+	love.graphics.rectangle("fill",player2.x,player2.y,20,80)
 
 	love.graphics.setFont(font)
 
