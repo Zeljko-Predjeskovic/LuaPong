@@ -2,19 +2,22 @@
 
 ## Run it
 
+Make sure to have Love installed. 
+Install it from https://love2d.org
+
 ### Linux
 
-1. Make sure to have Love installed !(love2d)[love2d.org]
 
-2. Clone repository
+
+1. Clone repository
 
 	git clone https://github.com/Zeljko-Predjeskovic/LuaPong.git
 
-3. Go into project 
+2. Go into project 
 
 	cd LuaPong
 
-4. Run it
+3. Run it
 
 	Love .
 
