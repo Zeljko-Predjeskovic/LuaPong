@@ -21,7 +21,7 @@ function love.load()
 	player1.y = 40
 	player1.score=0
 	
-	player2.x = 530
+	player2.x = 540
 	player2.y = 40
 	player2.score=0
 
@@ -43,24 +43,24 @@ function love.update()
 		end
 	
 	-- Check if the ball hits player and set the direction and angle in which way it will go
-		randomAngle = math.random()-0.5
+		randomAngle = math.random()-0.75
 
 		if (ball.y>=player1.y and ball.y<=player1.y+80)
-			and ball.x<=20 then
+			and ball.x<=10 then
 			ball.direction = true
 			ball.angle = (randomAngle*100 - (randomAngle*100)%1)/100
 		elseif (ball.y >= player2.y and ball.y<=player2.y+80)
-			and ball.x >= 530 then
+			and ball.x >= 540 then
 			ball.direction = false
 			ball.angle = (randomAngle*100 - (randomAngle*100)%1)/100
 
-	-- Check if it hits wall when no player reaches the ball		
-		elseif ball.x==0 then
+	-- Check if it hits wall when no player reaches the ball and resets after a point is done		
+		elseif ball.x<=0 then
 			player2.score = player2.score+1
 			ball.x = 550/2
 			ball.y = 380/2
 			ball.angle = 0
-		elseif ball.x==550 then
+		elseif ball.x>=550 then
 			player1.score = player1.score+1
 			ball.x = 550/2
 			ball.y = 380/2
@@ -75,7 +75,7 @@ function love.update()
 
 	-- Ball movement
 		
-		speed = 0.5 
+		speed = 0.75 
 		if ball.direction then
 			ball.x = ball.x+speed
 		else ball.x = ball.x-speed
@@ -84,14 +84,14 @@ function love.update()
 end
 
 function love.draw()
-	love.graphics.rectangle("fill",player1.x,player1.y,20,80)
-	love.graphics.rectangle("fill",player2.x,player2.y,20,80)
+	love.graphics.rectangle("fill",player1.x,player1.y,10,80)
+	love.graphics.rectangle("fill",player2.x,player2.y,10,80)
 
 	love.graphics.setFont(font)
 
 	love.graphics.circle("fill",ball.x,ball.y,ball.radius)
 
 	love.graphics.print(player1.score,player1.x,0)
-	love.graphics.print(player2.score,player2.x,0)
+	love.graphics.print(player2.score,player2.x-10,0)
 end
 
