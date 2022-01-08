@@ -28,16 +28,16 @@ end
 
 function love.update()
 	-- Key inputs for the two rectangles
-		if love.keyboard.isDown("w") then
+		if love.keyboard.isDown("w") and player1.y >= 0 then
 			player1.y = player1.y-1
 		end
-		if love.keyboard.isDown("s") then
+		if love.keyboard.isDown("s") and player1.y + 80 <= 380 then
 			player1.y = player1.y+1
 		end
-		if love.keyboard.isDown("i") then
+		if love.keyboard.isDown("i") and player2.y >= 0 then
 			player2.y = player2.y-1
 		end
-		if love.keyboard.isDown("k") then
+		if love.keyboard.isDown("k") and player2.y+80 <=380 then
 			player2.y = player2.y+1
 		end
 	
@@ -63,9 +63,9 @@ function love.update()
 			player1.score = player1.score+1
 			ball.x = 550/2
 			ball.y = 380/2
-			ball.angle=0
+			ball.angle = 0
 		end
-
+		
 	-- Detection for the walls for the ball to reflect on
 
 		if ball.y <= 5 or ball.y >= 375 then
