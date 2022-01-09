@@ -23,6 +23,12 @@ Install it from https://love2d.org
 
 Install Love2d and drag project folder into the exe file
 
+### Controls
+
+Player 1 : up:"w" down"s"
+
+Player 2 : up:"i" down"k"
+
 ### Screenshot
 
 ![](LuaPong.png)
